@@ -1,0 +1,11 @@
+.sectionTodoList{
+    width: 40%;
+}
+.sectionTodoList h2{
+    text-align: center;
+}
+.ul{
+    background-color: var(--fondo);
+    list-style: none;
+    padding: 0;
+}

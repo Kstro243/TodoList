@@ -1,0 +1,40 @@
+.li{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    height: 44px;
+    margin: 20px 0;
+
+    background: var(--fondo-texto);
+
+    border-radius: 10px;
+}
+.li p{
+    width: 80%;
+
+    text-align: center;
+}
+.completed{
+    text-decoration: line-through;
+}
+.li span{
+    width: 10%;
+    height: 100%;
+
+    background: var(--Buttons);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+}
+.li span:last-child:hover{
+    background: var(--erase);
+}
+.checked{
+    background: var(--checked) !important;
+}

@@ -1,0 +1,46 @@
+.div{
+    background: var(--fondo-texto);
+
+    width: 80%;
+    height: 44px;
+    border-radius: 10px;
+    margin: 16px 0;
+
+    display: flex;
+    justify-content: center;
+}
+.div input{
+    width: 90%;
+
+    border: none;
+    border-radius: 10px;
+
+    background-color: var(--fondo-texto);
+}
+.div input:focus{
+    outline: none;
+    padding-left: 20px;
+    font-size: 18px;
+}
+.div input:focus::placeholder{
+    color: transparent;
+}
+.div input::placeholder{
+    text-align: center;
+    color: black;
+    font-size: 18px;
+}
+.div button{
+    width: 10%;
+
+    background: var(--Buttons);
+
+    border: none;
+    border-radius: 10px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+}

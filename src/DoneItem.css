@@ -1,0 +1,40 @@
+.liDoneItem{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    height: 44px;
+    margin: 20px 0;
+
+    background: var(--checked-text);
+
+    border-radius: 10px;
+}
+.liDoneItem p{
+    width: 80%;
+
+    text-align: center;
+}
+.completed{
+    text-decoration: line-through;
+}
+.liDoneItem span{
+    width: 10%;
+    height: 100%;
+
+    background: var(--checked);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+}
+.liDoneItem span:last-child:hover{
+    background: var(--erase);
+}
+.checked{
+    background: var(--checked) !important;
+}
