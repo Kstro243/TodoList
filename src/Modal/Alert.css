@@ -1,0 +1,45 @@
+.Alert{
+    width: 70%;
+    height: 50%;
+    padding: 20px;
+
+    position: absolute;
+    top: 130px;
+
+    background: var(--fondo-texto);
+
+    border-radius: 20px;
+}
+.Alert h2{
+    width: 100%;
+    height: 80%;
+
+    margin: 0;
+
+    display: flex;
+    text-align: center;
+    align-items: center;
+}
+.Alert div {
+    width: 100%;
+    height: 20%;
+
+    display: flex;
+    justify-content: space-around;
+}
+.Alert div button{
+    width: 40%;
+    height: 100%;
+    padding: 0 40px;
+
+    border: none;
+    border-radius: 16px;
+
+    cursor: pointer;
+}
+.Alert div button:nth-child(1) {
+    background:var(--erase);
+}
+.Alert div button:nth-child(2) {
+    background:var(--checked);
+}

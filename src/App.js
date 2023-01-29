@@ -9,6 +9,9 @@ import { TodoItem } from './TodoItem';
 import { DoneList } from './DoneList';
 import { DoneItem } from './DoneItem';
 
+import { Modal } from './Modal/Modal';
+import { Alert } from './Modal/Alert';
+
 // const ToDo = [{
 //   tarea: 'Caballo',
 //   completed: false,
@@ -53,7 +56,7 @@ function useLocalStorage(itemName, initialValue) {
       } catch(error) {
         setError(error);
       }
-    }, 2000);
+    }, 1000);
   })
 
   const guardarItem = (newItem) => {
@@ -117,6 +120,14 @@ function App() {
     })
   }
   //Lógica para buscar Dones o Todos
+  const anadir = (tarea) => {
+    const newTodos = [...todo];
+    newTodos.push({
+      completed: false,
+      tarea,
+    });
+    guardarTodos(newTodos);
+  }
 
   const taskCompleted = (tarea) => {
     let object = {};
@@ -141,13 +152,30 @@ function App() {
   }
   //Lógica para agregar o quitar Dones
 
+  const BorrarDef = () => {
+    const taskIndex = todo.findIndex(todo => todo.tarea === tareaPing);
+    
+    const newTodos = [...todo];
+    newTodos.splice(taskIndex, 1);
+    guardarTodos(newTodos);
+    setopenAlert(false);
+  }
+
+  const [openAlert, setopenAlert] = React.useState(false);
+  const [tareaPing, setTarea] = React.useState('');
+  const BorrarTarea = (tarea) => {
+    setopenAlert(true);
+    setTarea(tarea);
+  }
+
   return (
     <React.Fragment>
       <TodoCounter
         totalTodos={totalTodos}
         completed={completedToDos}
       />
-      <TodoAdd/>
+      <TodoAdd
+      anadir={anadir} />
       <TodoSearch
         searchValue={searchValue}
         setsearchValue={setsearchValue}
@@ -163,7 +191,8 @@ function App() {
               key={tOdo.tarea} 
               tarea={tOdo.tarea} 
               completed={tOdo.completed}
-              completedFcn={() => taskCompleted(tOdo.tarea)} />
+              completedFcn={() => taskCompleted(tOdo.tarea)}
+              borrarTarea={() => BorrarTarea(tOdo.tarea)} />
           ))}
         </TodoList>
         <DoneList>
@@ -176,6 +205,15 @@ function App() {
           ))}
         </DoneList>
       </TodoTasks>
+      
+      {!!openAlert && (
+        <Modal>
+          <Alert 
+          setopenAlert={setopenAlert}
+          BorrarDef={BorrarDef}
+           />
+        </Modal>
+      )}
     </React.Fragment>
   );
 }
