@@ -1,4 +1,6 @@
 import React from 'react';
+
+//Style and components
 import './App.css';
 import { TodoCounter } from './TodoCounter';
 import { TodoAdd } from './TodoAdd';
@@ -8,144 +10,40 @@ import { TodoList } from './TodoList';
 import { TodoItem } from './TodoItem';
 import { DoneList } from './DoneList';
 import { DoneItem } from './DoneItem';
+//Style and components
 
+//Modals
 import { Modal } from './Modal/Modal';
 import { Alert } from './Modal/Alert';
+//Modals
 
-function useLocalStorage(itemName, initialValue) {
-  const [error, setError] =React.useState(false)
-  const [loading, setLoading] = React.useState(true);
-  const [item, setItem] = React.useState(initialValue);
-
-  React.useEffect(() => {
-    setTimeout(() => {
-      try{
-        const localStorageItem = localStorage.getItem(itemName);
-        let parsedItem;
-      
-        if (!localStorageItem) {
-          localStorage.setItem(itemName, JSON.stringify(initialValue));
-          parsedItem = initialValue;
-        } else {
-          parsedItem = JSON.parse(localStorageItem);
-        };
-  
-        setItem(parsedItem);
-        setLoading(false);
-      } catch(error) {
-        setError(error);
-      }
-    }, 1000);
-  })
-
-  const guardarItem = (newItem) => {
-    try{
-      const itemStringueados = JSON.stringify(newItem);
-      localStorage.setItem(itemName, itemStringueados);
-      setItem(newItem);
-    } catch (error) {
-      setError(error);
-    }
-  };
-
-  return {
-    item,
-    guardarItem,
-    loading,
-    error
-  };
-}
-
+//Custom hooks and others
+import { useLogic } from './Custom Hooks/CHlogic';
+//Custom hooks and others
 
 function App() {
-  const {item: todo,
-     guardarItem: guardarTodos,
-     loading,
-     error
-    } = useLocalStorage('TODOS_V1', []);
-  const {item: done,
-     guardarItem: guardarDones,
-    } = useLocalStorage('DONES_V1', []);
+  const {
+    totalTodos,
+    completedToDos,
 
-  const completedToDos = done.length;
-  const totalTodos = todo.length + done.length;
+    anadir,
 
-  //Variable que lee el Value del input del search
-  const [searchValue, setsearchValue] = React.useState('');
-  //Variable que lee el Value del input del search
+    searchValue,
+    setsearchValue,
 
-  //Lógica para buscar Dones o Todos
-  let searchedTodo = [];
+    error,
+    loading,
+    searchedTodo,
+    taskCompleted,
+    BorrarTarea,
 
-  if (!searchValue.length >= 1) {
-    searchedTodo = todo;
-    } else {
-    searchedTodo = todo.filter(tOdo => {
-      const todoText = tOdo.tarea.toLowerCase();
-      const searchText = searchValue.toLowerCase();
-      return todoText.includes(searchText);
-    })
-  }
+    searchedDoneTaks,
+    taskDeleted,
 
-  let searchedDoneTaks = [];
-
-  if (!searchValue.length >= 1) {
-    searchedDoneTaks = done;
-    } else {
-    searchedDoneTaks = done.filter(tOdo => {
-      const doneText = tOdo.tarea.toLowerCase();
-      const searchText = searchValue.toLowerCase();
-      return doneText.includes(searchText);
-    })
-  }
-  //Lógica para buscar Dones o Todos
-  const anadir = (tarea) => {
-    const newTodos = [...todo];
-    newTodos.push({
-      completed: false,
-      tarea,
-    });
-    guardarTodos(newTodos);
-  }
-
-  const taskCompleted = (tarea) => {
-    let object = {};
-    const taskIndex = todo.findIndex(todo => todo.tarea === tarea);
-    object = todo[taskIndex];
-
-    const newTodos = [...todo];
-    const newDones = [...done];
-    newTodos.splice(taskIndex, 1);
-    object.completed = true;
-    newDones.unshift(object);
-    guardarTodos(newTodos);
-    guardarDones(newDones);
-  }
-
-  const taskDeleted = (tarea) => {
-    const taskIndex = done.findIndex(todo => todo.tarea === tarea);
-    
-    const newDones = [...done];
-    newDones.splice(taskIndex, 1);
-    guardarDones(newDones);
-  }
-  //Lógica para agregar o quitar Dones
-
-  const BorrarDef = () => {
-    const taskIndex = todo.findIndex(todo => todo.tarea === tareaPing);
-    
-    const newTodos = [...todo];
-    newTodos.splice(taskIndex, 1);
-    guardarTodos(newTodos);
-    setopenAlert(false);
-  }
-
-  const [openAlert, setopenAlert] = React.useState(false);
-  const [tareaPing, setTarea] = React.useState('');
-  const BorrarTarea = (tarea) => {
-    setopenAlert(true);
-    setTarea(tarea);
-  }
+    openAlert,
+    setopenAlert,
+    BorrarDef,
+} = useLogic();
 
   return (
     <React.Fragment>
