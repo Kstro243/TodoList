@@ -12,27 +12,6 @@ import { DoneItem } from './DoneItem';
 import { Modal } from './Modal/Modal';
 import { Alert } from './Modal/Alert';
 
-// const ToDo = [{
-//   tarea: 'Caballo',
-//   completed: false,
-// },{
-//   tarea: 'Manzana',
-//   completed: false,
-// },{
-//   tarea: 'Martillo',
-//   completed: false,
-// },{
-//   tarea: 'Tarea',
-//   completed: false
-// }];
-
-// const Done = [{
-//   tarea: 'Tarea completada',
-//   completed: true
-// },{
-//   tarea: 'Completed tasks',
-//   completed: true
-// }];
 function useLocalStorage(itemName, initialValue) {
   const [error, setError] =React.useState(false)
   const [loading, setLoading] = React.useState(true);
@@ -167,6 +146,8 @@ function App() {
     setopenAlert(true);
     setTarea(tarea);
   }
+
+  // fdasfdsafdsfdsafdsaf
 
   return (
     <React.Fragment>
