@@ -1,13 +1,13 @@
 import React from "react";
 import './TodoAdd.css'
 
-function TodoAdd(props) {
+function TodoAdd({anadir}) {
     const [newTodoValue, setnewTodoValue] = React.useState('');
     const onChange = (event) => {
         setnewTodoValue(event.target.value)
     };
     const addTask = () => {
-        props.anadir(newTodoValue)
+        anadir(newTodoValue)
         setnewTodoValue('');
     };
 

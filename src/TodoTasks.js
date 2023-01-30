@@ -1,10 +1,10 @@
 import React from "react";
 import './TodoTasks.css'
 
-function TodoTasks(props) {
+function TodoTasks({children}) {
     return(
         <div className="divTodoTasks">
-            {props.children}
+            {children}
         </div>
     )
 };

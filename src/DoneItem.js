@@ -1,12 +1,16 @@
 import React from "react";
 import './DoneItem.css'
 
-function DoneItem(props) {
+function DoneItem({
+    tarea,
+    completed,
+    deletedFcn
+}) {
     return(
         <li className="liDoneItem">
-        <span className={`material-symbols-outlined ${props.completed && 'checked'}`}>check</span>
-        <p className={`${props.completed && 'completed'}`}>{props.tarea}</p>
-        <span onClick={props.deletedFcn} className="material-symbols-outlined">delete</span>
+        <span className={`material-symbols-outlined ${completed && 'checked'}`}>check</span>
+        <p className={`${completed && 'completed'}`}>{tarea}</p>
+        <span onClick={deletedFcn} className="material-symbols-outlined">delete</span>
         </li>
     )
 }

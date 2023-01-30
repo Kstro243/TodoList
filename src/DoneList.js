@@ -1,12 +1,12 @@
 import React from "react";
 import './DoneList.css'
 
-function DoneList(props ) {
+function DoneList({children}) {
     return(
         <section className="sectionDoneList">
             <h2>Tareas hechas</h2>
             <ul className="ul">
-                {props.children}  
+                {children}  
             </ul>
         </section>
     )

@@ -147,8 +147,6 @@ function App() {
     setTarea(tarea);
   }
 
-  // fdasfdsafdsfdsafdsaf
-
   return (
     <React.Fragment>
       <TodoCounter
