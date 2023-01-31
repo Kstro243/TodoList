@@ -19,6 +19,9 @@ import { Alert } from './Modal/Alert';
 
 //Custom hooks and others
 import { useLogic } from './Custom Hooks/CHlogic';
+import { Error } from './Interfaces/Error';
+import { Loading } from './Interfaces/Loading';
+import { EmptyList } from './Interfaces/EmptyList';
 //Custom hooks and others
 
 function App() {
@@ -47,41 +50,47 @@ function App() {
 
   return (
     <React.Fragment>
-      <TodoCounter
-        totalTodos={totalTodos}
-        completed={completedToDos}
-      />
-      <TodoAdd
-      anadir={anadir} />
-      <TodoSearch
-        searchValue={searchValue}
-        setsearchValue={setsearchValue}
-      />
-      <TodoTasks>
-        <TodoList>
-          {error && <p>Desespérate, hubo un error...</p>}
-          {loading && <p>Estamos cargando, no te desesperes</p>}
-          {(!loading && !searchedTodo.length) && <p>¡Crea tu primer Todo!</p>}
+      {error && <Error error={error} />}
+      {loading && <Loading />}
+      {!loading && (
+        <>
+          <TodoCounter>
+            totalTodos={totalTodos}
+            completed={completedToDos}
+          </TodoCounter> 
 
-          {searchedTodo.map(tOdo => (
-            <TodoItem 
-              key={tOdo.tarea} 
-              tarea={tOdo.tarea} 
-              completed={tOdo.completed}
-              completedFcn={() => taskCompleted(tOdo.tarea)}
-              borrarTarea={() => BorrarTarea(tOdo.tarea)} />
-          ))}
-        </TodoList>
-        <DoneList>
-          {searchedDoneTaks.map(done => (
-              <DoneItem 
-                key={done.tarea} 
-                tarea={done.tarea} 
-                completed={done.completed}
-                deletedFcn={() => taskDeleted(done.tarea)} />
-          ))}
-        </DoneList>
-      </TodoTasks>
+          <TodoAdd
+          anadir={anadir} />
+
+          <TodoSearch
+            searchValue={searchValue}
+            setsearchValue={setsearchValue} />
+
+          <TodoTasks>
+            <TodoList>
+              {searchedTodo.map(tOdo => (
+                <TodoItem 
+                  key={tOdo.tarea} 
+                  tarea={tOdo.tarea} 
+                  completed={tOdo.completed}
+                  completedFcn={() => taskCompleted(tOdo.tarea)}
+                  borrarTarea={() => BorrarTarea(tOdo.tarea)} />
+              ))}
+            </TodoList>
+            <DoneList>
+              {searchedDoneTaks.map(done => (
+                  <DoneItem 
+                    key={done.tarea} 
+                    tarea={done.tarea} 
+                    completed={done.completed}
+                    deletedFcn={() => taskDeleted(done.tarea)} />
+              ))}
+            </DoneList>
+          </TodoTasks>
+        </>
+
+      )}
+      {(!loading && !totalTodos) && <EmptyList />}
       
       {!!openAlert && (
         <Modal>
