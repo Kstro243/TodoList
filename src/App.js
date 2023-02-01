@@ -22,6 +22,7 @@ import { useLogic } from './Custom Hooks/CHlogic';
 import { Error } from './Interfaces/Error';
 import { Loading } from './Interfaces/Loading';
 import { EmptyList } from './Interfaces/EmptyList';
+import { EmptySearch } from './Interfaces/EmptySearch';
 //Custom hooks and others
 
 function App() {
@@ -54,10 +55,9 @@ function App() {
       {loading && <Loading />}
       {!loading && (
         <>
-          <TodoCounter>
+          <TodoCounter
             totalTodos={totalTodos}
-            completed={completedToDos}
-          </TodoCounter> 
+            completed={completedToDos}/> 
 
           <TodoAdd
           anadir={anadir} />
@@ -91,7 +91,7 @@ function App() {
 
       )}
       {(!loading && !totalTodos) && <EmptyList />}
-      
+      {(!loading && !searchedTodo.length && !searchedDoneTaks.length && !!totalTodos) && <EmptySearch searchValue={searchValue} />}
       {!!openAlert && (
         <Modal>
           <Alert 
